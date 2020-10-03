@@ -1,15 +1,7 @@
-#include <fstream>
-#include <cstring>
-#include "contact_list.h"
+#include "file.h"
 
 int main() {
-	ContactList contact_list({});
-	{
-		std::ifstream file("phonebook.txt");
-		if (file.fail()) {
-			std::cerr << std::strerror(errno);
-			return 1;
-		}
-		contact_list = ContactList::parse(file);
-	}
+	auto list = file::open("phonebook.txt");
+	list.push(Contact("test", "test"));
+	file::replace("phonebook.txt", list);
 }

@@ -9,6 +9,7 @@ set(
     SOURCES
     contact.cpp
     contact_list.cpp
+    file.cpp
 )
 
 add_executable(assignment-1 main.cpp ${SOURCES})

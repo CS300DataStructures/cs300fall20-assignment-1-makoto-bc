@@ -5,13 +5,12 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_subdirectory(tests)
 
-add_executable(
-    assignment-1
-    main.cpp
+set(
+    SOURCES
     contact.cpp
-    contact.h
     contact_list.cpp
-    contact_list.h
 )
 
-add_library(libassignment-1 STATIC contact.cpp)
+add_executable(assignment-1 main.cpp ${SOURCES})
+
+add_library(libassignment-1 STATIC ${SOURCES})

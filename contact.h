@@ -3,6 +3,7 @@
 
 #include <string>
 #include <utility>
+#include <tuple>
 
 class Contact {
 public:
@@ -20,9 +21,10 @@ public:
 		return _phone_number;
 	}
 	
-	bool operator==(const Contact& other) const {
-		return _name == other._name && _phone_number == other._phone_number;
+	bool operator==(const Contact &rhs) const {
+		return std::tie(_name, _phone_number) == std::tie(rhs._name, rhs._phone_number);
 	}
+	
 private:
 	std::string _name;
 	std::string _phone_number;

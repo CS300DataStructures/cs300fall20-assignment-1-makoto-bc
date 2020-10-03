@@ -5,7 +5,7 @@ std::ostream& operator<<(std::ostream& os, const Contact& contact) {
 	return os << "{" << contact.name() << ", " << contact.phone_number() << "}";
 }
 
-TEST(ContactTest, test) {
+TEST(Contact, parse) {
 	struct Test {
 		const std::string row;
 		const Contact expected;

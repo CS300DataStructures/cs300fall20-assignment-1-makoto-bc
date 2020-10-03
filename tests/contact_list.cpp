@@ -13,11 +13,11 @@ TEST(ContactList, parse) {
 			ContactList(),
 		},
 		{
-			"a b c\n",
+			"a b c\r\n",
 			ContactList({Contact("a b", "c")}),
 		},
 		{
-			"a b c\na b c",
+			"a b c\r\na b c",
 			ContactList({
 				Contact("a b", "c"),
 				Contact("a b", "c"),

@@ -44,3 +44,24 @@ TEST(ContactList, encode) {
 		EXPECT_EQ(result.str(), "a b\r\nc d");
 	}
 }
+
+TEST(ContactList, exists) {
+	bool result = ContactList({}).exists(Contact("", ""));
+	EXPECT_EQ(result, false);
+
+	result = ContactList({{"", ""}}).exists(Contact("", ""));
+	EXPECT_EQ(result, true);
+}
+
+TEST(ContactList, delete_) {
+	{
+		ContactList list({});
+		list.delete_("");
+		EXPECT_EQ(list, ContactList({}));
+	}
+	{
+		ContactList list({{"", ""}, {"", "a"}, {"b", "c"}});
+		list.delete_("");
+		EXPECT_EQ(list, ContactList({{"b", "c"}}));
+	}
+}

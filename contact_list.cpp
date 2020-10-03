@@ -1,4 +1,6 @@
+#include <optional>
 #include "contact_list.h"
+#include <algorithm>
 
 ContactList ContactList::parse(std::istream& file) {
 	ContactList result({});
@@ -24,4 +26,14 @@ void ContactList::encode(std::ostream& file) const {
 			file << "\r\n";
 		}
 	}
+}
+bool ContactList::exists(const Contact& contact) const {
+	return std::find(_list.cbegin(), _list.cend(), contact) != _list.cend();
+}
+
+void ContactList::delete_(const std::string& contact_name) {
+	auto pred = [&](const Contact& c){
+		return c.name() == contact_name;
+	};
+	_list.erase(std::remove_if(_list.begin(), _list.end(), pred), _list.end());
 }

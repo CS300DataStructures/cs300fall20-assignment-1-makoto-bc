@@ -22,12 +22,16 @@ public:
 	explicit ContactList(std::vector<Contact> list)
 		: _list(std::move(list))
 	{}
+
+	void encode(std::ostream& file) const;
 	
 	void push(Contact contact) {
 		_list.push_back(std::move(contact));
 	}
 	
-	void encode(std::ostream& file) const;
+	bool exists(const Contact& contact) const;
+	
+	void delete_(const std::string& contact_name);
 	
 	bool operator==(const ContactList &rhs) const {
 		return _list == rhs._list;

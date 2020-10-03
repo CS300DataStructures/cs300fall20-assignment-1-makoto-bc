@@ -20,6 +20,9 @@ void replace(const std::string& path, const ContactList& list) {
 		}
 
 		list.encode(file);
+		if (file.fail()) {
+			throw std::runtime_error(std::strerror(errno));
+		}
 	}
 
 	std::remove(path.c_str());

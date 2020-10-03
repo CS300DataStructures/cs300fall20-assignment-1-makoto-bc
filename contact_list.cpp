@@ -37,3 +37,14 @@ void ContactList::delete_(const std::string& contact_name) {
 	};
 	_list.erase(std::remove_if(_list.begin(), _list.end(), pred), _list.end());
 }
+
+void ContactList::output(std::ostream& out) const {
+	std::string buf;
+	for (size_t i = 0; i < _list.size(); ++i) {
+		_list[i].encode(buf);
+		out << buf;
+		if (i < _list.size() - 1) {
+			out << "\n";
+		}
+	}
+}

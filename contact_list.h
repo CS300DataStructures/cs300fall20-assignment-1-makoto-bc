@@ -33,6 +33,12 @@ public:
 	
 	void delete_(const std::string& contact_name);
 	
+	size_t size() {
+		return _list.size();
+	}
+	
+	void output(std::ostream& out) const;
+	
 	bool operator==(const ContactList &rhs) const {
 		return _list == rhs._list;
 	}

@@ -17,9 +17,12 @@ public:
 	const std::string& name() const {
 		return _name;
 	}
+	
 	const std::string& phone_number() const {
 		return _phone_number;
 	}
+
+	void encode(std::string& dst) const;
 	
 	bool operator==(const Contact &rhs) const {
 		return std::tie(_name, _phone_number) == std::tie(rhs._name, rhs._phone_number);

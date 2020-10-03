@@ -3,10 +3,13 @@
 #include "contact_list.h"
 
 int main() {
-	std::ifstream file("phonebook.txt");
-	if (file.fail()) {
-		std::cerr << std::strerror(errno);
-		return 1;
+	ContactList contact_list({});
+	{
+		std::ifstream file("phonebook.txt");
+		if (file.fail()) {
+			std::cerr << std::strerror(errno);
+			return 1;
+		}
+		contact_list = ContactList::parse(file);
 	}
-	auto _ = ContactList::parse(file);
 }

@@ -10,7 +10,7 @@ TEST(ContactList, parse) {
 	std::vector<Test> tests {
 		{
 			"",
-			ContactList(),
+			ContactList({}),
 		},
 		{
 			"a b c\r\n",
@@ -29,5 +29,18 @@ TEST(ContactList, parse) {
 		std::istringstream stream(tests[i].file);
 		ContactList result = ContactList::parse(stream);
 		EXPECT_EQ(result, tests[i].expected) << i;
+	}
+}
+
+TEST(ContactList, encode) {
+	{
+		std::stringstream result;
+		ContactList({}).encode(result);
+		EXPECT_EQ(result.str(), "");
+	}
+	{
+		std::stringstream result;
+		ContactList({{"a", "b"}, {"c", "d"}}).encode(result);
+		EXPECT_EQ(result.str(), "a b\r\nc d");
 	}
 }

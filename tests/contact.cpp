@@ -42,3 +42,9 @@ TEST(Contact, parse) {
 		EXPECT_EQ(Contact::parse(tests[i].row), tests[i].expected) << i;
 	}
 }
+
+TEST(Contact, encode) {
+	std::string result;
+	Contact("name", "phone").encode(result);
+	EXPECT_EQ(result, "name phone");
+}

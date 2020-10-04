@@ -41,7 +41,7 @@ TEST(ContactList, encode) {
 	{
 		std::stringstream result;
 		ContactList({{"a", "b"}, {"c", "d"}}).encode(result);
-		EXPECT_EQ(result.str(), "a b\r\nc d");
+		EXPECT_EQ(result.str(), "a b\nc d");
 	}
 }
 

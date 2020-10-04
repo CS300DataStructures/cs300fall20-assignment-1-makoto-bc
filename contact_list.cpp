@@ -6,7 +6,7 @@ ContactList ContactList::parse(std::istream& file) {
 	ContactList result({});
 	
 	std::string line;
-	while (std::getline(file, line, '\n')) {
+	while (std::getline(file, line)) {
 		if (line[line.size() - 1] == '\r') {
 			line.pop_back();
 		}
@@ -21,9 +21,8 @@ void ContactList::encode(std::ostream& file) const {
 	std::string buf;
 	for (size_t i = 0; i < _list.size(); ++i) {
 		_list[i].encode(buf);
-		file << buf;
 		if (i < _list.size() - 1) {
-			file << "\r\n";
+			file << "\n";
 		}
 	}
 }

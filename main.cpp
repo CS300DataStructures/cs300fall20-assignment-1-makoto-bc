@@ -9,11 +9,17 @@ enum Command {
 	quit = 'Q',
 };
 
+/**
+ * Asks for contact info.
+ */
 Contact input_contact() {
 	std::string name;
 	while (true) {
 		std::cout << "Enter name: " << std::flush;
 		std::getline(std::cin, name);
+		
+		// A missing space or an extra space can cause problems when encoding the contact list back
+		// to a file.
 		if (std::count(name.cbegin(), name.cend(), ' ') == 1) {
 			break;
 		} else {
@@ -34,10 +40,10 @@ Contact input_contact() {
 	return Contact(name, phone_number);
 }
 
-const char* file_path = "phonebook.txt";
+const char* phonebook_path = "phonebook.txt";
 
 int main() {
-	ContactList list = file::open(file_path);
+	ContactList list = file::open(phonebook_path);
 	
 	std::cout << "***MY PHONEBOOK APPLICATION***\nPlease choose an operation:\n";
 
@@ -56,7 +62,7 @@ int main() {
 		switch (input[0]) {
 		case Command::add: {
 			list.push(input_contact());
-			file::replace(file_path, list);
+			file::replace(phonebook_path, list);
 			std::cout << "Contact added.";
 			break;
 		}
@@ -75,7 +81,7 @@ int main() {
 			
 			size_t original_size = list.size();
 			list.delete_(name);
-			file::replace(file_path, list);
+			file::replace(phonebook_path, list);
 			std::cout << original_size - list.size() << " record(s) deleted.";
 			break;
 		}
@@ -85,7 +91,6 @@ int main() {
 		}
 		case Command::quit: {
 			std::exit(EXIT_SUCCESS);
-			break;
 		}
 		default: {
 			std::cout << "Invalid option.";

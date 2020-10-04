@@ -5,32 +5,32 @@
 #include <utility>
 #include <tuple>
 
+/**
+ * Contains a name and a phone number.
+ */
 class Contact {
 public:
+	std::string name;
+	std::string phone_number;
+	
 	Contact(std::string name, std::string phone_number)
-		: _name(std::move(name))
-		, _phone_number(std::move(phone_number))
+		: name(std::move(name))
+		, phone_number(std::move(phone_number))
 	{}
 	
-	static Contact parse(const std::string& row);
-	
-	const std::string& name() const {
-		return _name;
-	}
-	
-	const std::string& phone_number() const {
-		return _phone_number;
-	}
+	/**
+	 * Parses given string.
+	 */
+	static Contact parse(const std::string& s);
 
+	/**
+	 * Encodes this contact and writes it to dst. dst is cleared prior to writing.
+	 */
 	void encode(std::string& dst) const;
 	
 	bool operator==(const Contact &rhs) const {
-		return std::tie(_name, _phone_number) == std::tie(rhs._name, rhs._phone_number);
+		return std::tie(name, phone_number) == std::tie(rhs.name, rhs.phone_number);
 	}
-	
-private:
-	std::string _name;
-	std::string _phone_number;
 };
 
 #endif //ASSIGNMENT_1__CONTACT_H_

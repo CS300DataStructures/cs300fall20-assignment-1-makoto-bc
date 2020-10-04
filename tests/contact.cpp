@@ -2,7 +2,7 @@
 #include "../contact.h"
 
 std::ostream& operator<<(std::ostream& os, const Contact& contact) {
-	return os << "{" << contact.name() << ", " << contact.phone_number() << "}";
+	return os << "{" << contact.name << ", " << contact.phone_number << "}";
 }
 
 TEST(Contact, parse) {

@@ -27,16 +27,6 @@ void ContactList::encode(std::ostream& file) const {
 		}
 	}
 }
-bool ContactList::exists(const Contact& contact) const {
-	return std::find(_list.cbegin(), _list.cend(), contact) != _list.cend();
-}
-
-void ContactList::delete_(const std::string& contact_name) {
-	auto pred = [&](const Contact& c){
-		return c.name() == contact_name;
-	};
-	_list.erase(std::remove_if(_list.begin(), _list.end(), pred), _list.end());
-}
 
 void ContactList::output(std::ostream& out) const {
 	std::string buf;
@@ -47,4 +37,15 @@ void ContactList::output(std::ostream& out) const {
 			out << "\n";
 		}
 	}
+}
+
+bool ContactList::exists(const Contact& contact) const {
+	return std::find(_list.cbegin(), _list.cend(), contact) != _list.cend();
+}
+
+void ContactList::delete_(const std::string& contact_name) {
+	auto pred = [&](const Contact& c){
+		return c.name == contact_name;
+	};
+	_list.erase(std::remove_if(_list.begin(), _list.end(), pred), _list.end());
 }

@@ -1,16 +1,15 @@
 #include "contact.h"
 
 Contact Contact::parse(const std::string& s) {
-	size_t first_space = s.find(' ');
-	size_t second_space = s.find(' ', first_space + 1);
+	size_t last_space = s.find_last_of(' ');
 
-	std::string name = s.substr(0, second_space);
+	std::string phone_number = s.substr(last_space + 1);
 	
-	if (second_space == std::string::npos) {
-		return Contact(name, "");
+	if (last_space == std::string::npos) {
+		return Contact("", phone_number);
 	}
 	
-	return Contact(name, s.substr(second_space + 1));
+	return Contact(s.substr(0, last_space), phone_number);
 }
 
 void Contact::encode(std::string& dst) const {

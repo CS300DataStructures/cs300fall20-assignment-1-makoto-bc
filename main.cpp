@@ -14,23 +14,14 @@ enum Command {
  */
 Contact input_contact() {
 	std::string name;
-	while (true) {
-		std::cout << "Enter name: " << std::flush;
-		std::getline(std::cin, name);
-		
-		// A missing space or an extra space can cause problems when encoding the contact list back
-		// to a file.
-		if (std::count(name.cbegin(), name.cend(), ' ') == 1) {
-			break;
-		} else {
-			std::cout << "Name is invalid.\n";
-		}
-	}
+	std::cout << "Enter name: " << std::flush;
+	std::getline(std::cin, name);
 
 	std::string phone_number;
 	while (true) {
 		std::cout << "Enter phone: " << std::flush;
 		std::getline(std::cin, phone_number);
+		// A space in the phone number will change the name when decoded
 		if (std::count(phone_number.cbegin(), phone_number.cend(), ' ') == 0) {
 			break;
 		} else {
@@ -54,8 +45,7 @@ int main() {
 		std::getline(std::cin, input);
 		
 		if (input.size() != 1) {
-			std::cout << "Invalid option.";
-			std::cout << "\n\n" << std::flush;
+			std::cout << "Invalid option.\n\n";
 			continue;
 		}
 		
@@ -97,6 +87,6 @@ int main() {
 		}
 		}
 		
-		std::cout << "\n\n" << std::flush;
+		std::cout << "\n\n";
 	}
 }

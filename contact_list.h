@@ -16,10 +16,9 @@ public:
 	 * Parses phonebook file.
 	 */
 	static ContactList parse(std::istream& file);
-	
+
 	explicit ContactList(std::vector<Contact> list)
-		: _list(std::move(list))
-	{}
+		: _list(std::move(list)) {}
 
 	/**
 	 * Encodes ContactList in a machine readable format.
@@ -32,32 +31,32 @@ public:
 	 * @param out Stream to write to 
 	 */
 	void output(std::ostream& out) const;
-	
+
 	/**
 	 * Adds contact to the end of this list.
 	 */
 	void push(Contact contact) {
 		_list.push_back(std::move(contact));
 	}
-	
+
 	/** 
 	 * @return true if an entry that equals given contact exists.  
 	 */
 	bool exists(const Contact& contact) const;
-	
+
 	/**
 	 * Deletes all contacts with given contact name.
 	 */
-	void delete_(const std::string& contact_name);
-	
+	void delete_(const std::string& contactName);
+
 	/**
 	 * @return The size of this list. 
 	 */
 	size_t size() {
 		return _list.size();
 	}
-	
-	bool operator==(const ContactList &rhs) const {
+
+	bool operator==(const ContactList& rhs) const {
 		return _list == rhs._list;
 	}
 private:

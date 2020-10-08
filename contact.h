@@ -11,13 +11,12 @@
 class Contact {
 public:
 	std::string name;
-	std::string phone_number;
-	
-	Contact(std::string name, std::string phone_number)
+	std::string phoneNumber;
+
+	Contact(std::string name, std::string phoneNumber)
 		: name(std::move(name))
-		, phone_number(std::move(phone_number))
-	{}
-	
+		  , phoneNumber(std::move(phoneNumber)) {}
+
 	/**
 	 * Parses given string.
 	 */
@@ -27,9 +26,9 @@ public:
 	 * Encodes this contact and writes it to dst. dst is cleared prior to writing.
 	 */
 	void encode(std::string& dst) const;
-	
-	bool operator==(const Contact &rhs) const {
-		return std::tie(name, phone_number) == std::tie(rhs.name, rhs.phone_number);
+
+	bool operator==(const Contact& rhs) const {
+		return std::tie(name, phoneNumber) == std::tie(rhs.name, rhs.phoneNumber);
 	}
 };
 

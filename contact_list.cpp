@@ -4,7 +4,7 @@
 
 ContactList ContactList::parse(std::istream& file) {
 	ContactList result({});
-	
+
 	std::string line;
 	while (std::getline(file, line)) {
 		if (line[line.size() - 1] == '\r') {
@@ -12,7 +12,7 @@ ContactList ContactList::parse(std::istream& file) {
 		}
 		result.push(Contact::parse(line));
 	}
-	
+
 	file.clear();
 	return result;
 }
@@ -43,9 +43,9 @@ bool ContactList::exists(const Contact& contact) const {
 	return std::find(_list.cbegin(), _list.cend(), contact) != _list.cend();
 }
 
-void ContactList::delete_(const std::string& contact_name) {
-	auto pred = [&](const Contact& c){
-		return c.name == contact_name;
+void ContactList::delete_(const std::string& contactName) {
+	auto pred = [&](const Contact& c) {
+		return c.name == contactName;
 	};
 	_list.erase(std::remove_if(_list.begin(), _list.end(), pred), _list.end());
 }

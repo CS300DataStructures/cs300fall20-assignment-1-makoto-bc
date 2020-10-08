@@ -1,3 +1,9 @@
+// Assignment-1
+// Makoto Emura
+// 10/8/2020
+// Description: Displays an interface for managing a phonebook and 
+// stores this information in phonebook.txt
+
 #include <algorithm>
 #include "file.h"
 
@@ -12,52 +18,51 @@ enum Command {
 /**
  * Asks for contact info.
  */
-Contact input_contact() {
+Contact inputContact() {
 	std::string name;
 	std::cout << "Enter name: " << std::flush;
 	std::getline(std::cin, name);
 
-	std::string phone_number;
+	std::string phoneNumber;
 	while (true) {
 		std::cout << "Enter phone: " << std::flush;
-		std::getline(std::cin, phone_number);
+		std::getline(std::cin, phoneNumber);
 		// A space in the phone number will change the name when decoded
-		if (std::count(phone_number.cbegin(), phone_number.cend(), ' ') == 0) {
+		if (std::count(phoneNumber.cbegin(), phoneNumber.cend(), ' ') == 0) {
 			break;
 		} else {
 			std::cout << "Phone is invalid.\n";
 		}
 	}
-	return Contact(name, phone_number);
+	return Contact(name, phoneNumber);
 }
 
-const char* phonebook_path = "phonebook.txt";
-
 int main() {
-	ContactList list = file::open(phonebook_path);
-	
+	const std::string phonebookPath = "phonebook.txt";
+	ContactList list = file::open(phonebookPath);
+
 	std::cout << "***MY PHONEBOOK APPLICATION***\nPlease choose an operation:\n";
 
-	while(true) {
+	while (true) {
 		std::cout << "A(Add) | S (Search) | D(Delete) | L(List) | Q(Quit): " << std::flush;
-		
+
 		std::string input;
 		std::getline(std::cin, input);
-		
+
 		if (input.size() != 1) {
 			std::cout << "Invalid option.\n\n";
 			continue;
 		}
-		
+
 		switch (input[0]) {
 		case Command::add: {
-			list.push(input_contact());
-			file::replace(phonebook_path, list);
+			list.push(inputContact());
+			file::replace(phonebookPath, list);
 			std::cout << "Contact added.";
 			break;
 		}
 		case Command::search: {
-			if (list.exists(input_contact())) {
+			if (list.exists(inputContact())) {
 				std::cout << "This contact exists.";
 			} else {
 				std::cout << "This contact does not exist.";
@@ -68,11 +73,11 @@ int main() {
 			std::cout << "Enter name: " << std::flush;
 			std::string name;
 			std::getline(std::cin, name);
-			
-			size_t original_size = list.size();
+
+			size_t originalSize = list.size();
 			list.delete_(name);
-			file::replace(phonebook_path, list);
-			std::cout << original_size - list.size() << " record(s) deleted.";
+			file::replace(phonebookPath, list);
+			std::cout << originalSize - list.size() << " record(s) deleted.";
 			break;
 		}
 		case Command::list: {
@@ -86,7 +91,7 @@ int main() {
 			std::cout << "Invalid option.";
 		}
 		}
-		
+
 		std::cout << "\n\n";
 	}
 }

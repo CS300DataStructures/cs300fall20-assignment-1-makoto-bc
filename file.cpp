@@ -11,7 +11,7 @@ ContactList open(const std::string& path) {
 
 void replace(const std::string& path, const ContactList& list) {
 	std::remove((path + ".tmp").c_str());
-	
+
 	{
 		std::ofstream file(path + ".tmp");
 		if (file.fail()) {
